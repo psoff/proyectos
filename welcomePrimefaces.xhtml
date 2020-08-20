@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>PrimeFaces</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                    <h:form>
+                        <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true" />
+
+                        <p:dashboard id="board" model="#{dashboardView.model}">
+
+
+                            <p:panel id="sports" header="Sports">
+                                <h:outputText value="Sports Content" />
+                            </p:panel>
+
+                            <p:panel id="finance" header="Finance">
+                                <h:outputText value="Finance Content" />
+                            </p:panel>
+
+                            <p:panel id="lifestyle" header="Lifestyle">
+                                <h:outputText value="Lifestyle Content"  />
+                            </p:panel>
+
+                            <p:panel id="weather" header="Weather">
+                                <h:outputText value="Weather Content" />
+                            </p:panel>
+
+                            <p:panel id="politics" header="Politics">
+                                <h:outputText value="Politics Content" />
+                            </p:panel>
+                        </p:dashboard>
+                    </h:form>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="180" closable="true" collapsible="true">
+                    Footer
+                    <h:form>     
+        <p:messages>
+            <p:autoUpdate />
+        </p:messages>
+                        <h:outputLabel for="name" value="Name:" style="font-weight:bold"/>
+                        <p:inputText id="name" value="#{validationView.text}" required="true" label="Name"/>
+                        <p:message for="name" />
+                        <h:outputText value="#{validationView.text}" />
+
+                        <h:outputLabel for="money" value="Currency ($):" style="font-weight:bold"/>
+                        <p:inputText id="money" value="#{validationView.money}" label="Currency" required="true">
+                            <f:convertNumber type="currency" currencySymbol="$"/>
+                        </p:inputText>
+                        <p:message for="money" />
+                        <h:outputText value="#{validationView.money}">
+                            <f:convertNumber  type="currency" currencySymbol="$" />
+                        </h:outputText>
+
+                        <h:outputLabel for="localDate3" value="LocalDate (Java8; PF DatePicker)" style="font-weight:bold"/>
+                        <p:datePicker id="localDate3" value="#{validationView.localDate3}" pattern="MM/dd/yyyy" label="LocalDate (Java8; PF DatePicker)" required="true">
+                            <f:convertDateTime pattern="MM/dd/yyyy" type="localDate" />
+                        </p:datePicker>
+                        <p:message for="localDate3" />
+                        <h:outputText value="#{validationView.localDate3}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" type="localDate" />
+                        </h:outputText>
+                        <p:commandButton value="Guardar" ajax="false" validateClient="true" style="margin-right:10px"/>
+                    </h:form>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="175" header="Left" collapsible="true">
+                    <p:menu>
+                        <p:submenu label="Resources">
+                            <p:menuitem value="Demo" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
+                            <p:menuitem value="Documentation" url="http://www.primefaces.org/documentation.html" />
+                            <p:menuitem value="Forum" url="http://forum.primefaces.org/" />
+                            <p:menuitem value="Themes" url="http://www.primefaces.org/themes.html" />
+
+                        </p:submenu>
+
+                    </p:menu>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+
+                    <p:timeline id="timeline" value="#{basicTimelineView.model}" height="250px"
+                                selectable="#{basicTimelineView.selectable}"
+                                zoomable="#{basicTimelineView.zoomable}"
+                                moveable="#{basicTimelineView.moveable}"
+                                stackEvents="#{basicTimelineView.stackEvents}"
+                                axisOnTop="#{basicTimelineView.axisOnTop}"
+                                eventStyle="#{basicTimelineView.eventStyle}"
+                                showCurrentTime="#{basicTimelineView.showCurrentTime}">
+
+                        <p:ajax event="select" listener="#{basicTimelineView.onSelect}"/>
+
+                    </p:timeline>
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
+</html>
+
